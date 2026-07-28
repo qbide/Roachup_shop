@@ -1,0 +1,36 @@
+<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <g stroke="#183D30" stroke-width="5" stroke-linecap="round" fill="none">
+      <path d="M70 55 L35 35"/>
+      <path d="M72 75 L30 78"/>
+      <path d="M75 95 L38 118"/>
+      <path d="M130 55 L165 35"/>
+      <path d="M128 75 L170 78"/>
+      <path d="M125 95 L162 118"/>
+    </g>
+    <g stroke="#183D30" stroke-width="4" stroke-linecap="round" fill="none">
+      <path d="M85 40 Q70 10 55 8"/>
+      <path d="M115 40 Q130 10 145 8"/>
+    </g>
+    <ellipse cx="100" cy="80" rx="55" ry="38" fill="#F2B705"/>
+    <ellipse cx="100" cy="80" rx="55" ry="38" fill="url(#sheenGold)" opacity="0.6"/>
+    <path d="M60 80 Q100 92 140 80" stroke="#B8860B" stroke-width="3" fill="none" opacity="0.6"/>
+    <path d="M65 62 Q100 72 135 62" stroke="#B8860B" stroke-width="3" fill="none" opacity="0.5"/>
+    <circle cx="100" cy="46" r="22" fill="#F7CE3E"/>
+    <circle cx="91" cy="43" r="5.5" fill="#183D30"/>
+    <circle cx="109" cy="43" r="5.5" fill="#183D30"/>
+    <circle cx="93" cy="41" r="1.8" fill="#fff"/>
+    <circle cx="111" cy="41" r="1.8" fill="#fff"/>
+    <!-- little sparkles for rare feel -->
+    <g fill="#FFF6D6">
+      <path d="M160 30 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" opacity="0.9"/>
+      <path d="M35 100 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2 z" opacity="0.8"/>
+    </g>
+  </g>
+  <defs>
+    <radialGradient id="sheenGold" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

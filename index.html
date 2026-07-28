@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Chợ đen Roachup</title>
+
+<!-- Font hỗ trợ tiếng Việt: Baloo 2 (tiêu đề, cute/tròn) + Be Vietnam Pro (nội dung) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============================================================
+       PAGE 1: MAIN MENU
+       ============================================================ -->
+  <section id="page-menu" class="page menu-page is-active">
+    <h1 class="menu-title"><span class="emoji-roach">🪳</span> Chợ đen Roachup</h1>
+
+    <!-- Khu mô tả tự viết: sửa trực tiếp đoạn text bên dưới -->
+    <p class="menu-desc" id="menu-description">
+      Mua bán thập cẩm
+    </p>
+
+    <div class="menu-buttons">
+      <button class="btn btn-primary" data-goto="play"> Gián gián gián </button>
+      <button class="btn btn-donate" data-goto="donate"> Gián</button>
+      <button class="btn btn-donate" data-goto="donate"> Gián</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 2: TRANG CHƠI
+       ============================================================ -->
+  <section id="page-play" class="page play-page">
+    <header class="play-header">
+      <h2 class="play-title">Bắt gián nhận quà</h2>
+      <div class="currency-hud">
+        <div class="currency-pill">
+          <span class="icon" id="poop-icon">💩</span>
+          <span id="poop-value">999</span>
+        </div>
+        <div class="currency-pill">
+          <span class="icon" id="cheese-icon">🧀</span>
+          <span id="cheese-value">999</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Khu vực gián di chuyển tự do (render + spawn từ script.js) -->
+    <div class="roach-field" id="roach-field"></div>
+
+    <footer class="play-footer">
+      <button class="btn btn-exchange" id="exchange-btn">
+        <span id="exchange-label">Đổi gián</span>
+      </button>
+    </footer>
+  </section>
+
+  <!-- ============================================================
+       PAGE 3: DONATE
+       ============================================================ -->
+  <section id="page-donate" class="page donate-page">
+    <div class="donate-card">
+      <h2 class="display" style="font-size:1.6rem;">Ăn xin onl</h2>
+      <!-- Thay ảnh QR thật vào src bên dưới -->
+      <div class="donate-qr">Dán ảnh QR donate của bạn vào đây (thẻ &lt;img&gt; trong index.html)</div>
+      <p style="color:var(--text-soft); max-width:340px; font-size:0.95rem;">
+        Tiền nhiều kh có gì làm thì quăng vào đây
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     FLOATING NAV (nổi ở góc phải dưới, luôn hiện trên mọi page)
+     ============================================================ -->
+<button id="floating-logo" class="floating-logo" aria-label="Mở menu điều hướng">🪳</button>
+<nav id="floating-nav" class="floating-nav">
+  <button data-goto="menu">Trang chủ</button>
+  <button data-goto="play">Gián gián gián</button>
+  <button data-goto="donate">Gián</button>
+</nav>
+
+<!-- ============================================================
+     POPUP MUA
+     ============================================================ -->
+<div id="buy-overlay" class="overlay">
+  <div id="buy-popup" class="popup popup-buy theme-default1">
+    <button id="buy-close" class="popup-close">✕</button>
+    <div class="popup-image-wrap">
+      <img id="buy-image" src="" alt="">
+    </div>
+    <div class="popup-content">
+      <h3 class="popup-title" id="buy-title">Tên gián</h3>
+      <div class="popup-price-tag">
+        <span id="buy-poop-price">💩 0</span>
+        <span id="buy-cheese-price">🧀 0</span>
+      </div>
+      <div class="popup-desc-wrap">
+        <p id="buy-desc">Mô tả...</p>
+      </div>
+      <button id="buy-btn" class="popup-buy-btn">
+        <span id="buy-btn-label">Mua</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     POPUP CẢM ƠN
+     ============================================================ -->
+<div id="thanks-overlay" class="overlay">
+  <div id="thanks-popup" class="popup popup-thanks theme-default2">
+    <button id="thanks-close" class="popup-close">✕</button>
+    <img id="thanks-image" src="" alt="">
+    <p class="popup-thanks-caption" id="thanks-caption">Cảm ơn bạn!</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

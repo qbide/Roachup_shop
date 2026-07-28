@@ -1,0 +1,143 @@
+{
+  "currency": {
+    "defaultPoop": 999,
+    "defaultCheese": 999,
+    "poopLabel": "Cức",
+    "cheeseLabel": "Phô mai",
+    "poopIcon": "💩",
+    "cheeseIcon": "🧀"
+  },
+
+  "exchange": {
+    "priceComment": 1,
+    "price": { "poop": 3, "cheese": 0 },
+    "buttonLabel": "Đổi gián"
+  },
+
+  "roach": {
+    "countMin": 7,
+    "countMax": 14,
+    "speedMin": 100,
+    "speedMax": 200,
+    "sizeMin": 64,
+    "sizeMax": 100,
+    "labelScale": 1,
+    "_comment": "labelScale: label to bằng % kích thước con gián (0.7 = 70%)"
+  },
+
+  "groups": [
+    {
+      "id": "ny",
+      "chance": 25,
+      "title": "Anh người yêu",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 100, "cheese": 100 },
+      "popup_buy": {
+        "image": "img/vatpham/anhny.jpg",
+        "title": "Anh người yêu chân thành",
+        "description": "Một anh người yêu chân thành, đẹp trai, có hơn 1 năm kinh nghiệm, tinh tế, tử tế nhưng kh kinh tế. Và đặc biệt là thủ khoa khối a00 dbkcl. Một anh người yêu tốt như vậy chỉ có bán tại chợ đen Roachup!!",
+        "button": { "title": "ib làm quen❤️", "url": "https://www.facebook.com/tran.quang.binh.459692" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "assets/misc/gift.svg",
+        "caption": "Làm quen tìm hiểu nho:3",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
+    },
+    {
+      "id": "1sao",
+      "chance": 5,
+      "title": "1sao",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 999, "cheese": 100 },
+      "popup_buy": {
+        "image": "",
+        "title": "Vote 1 sao",
+        "description": "Game chán quá muốn đánh giá 1 sao? Vote ngay với giá siêu hời chỉ 999 cức và 100 phô mai",
+        "button": { "title": "Vote", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "img/qr/qbide.jpg",
+        "caption": "Vote 1 sao rồi sướng cái tay chưa. Trước khi xoá game thì cho dev bào lần cuối=))",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
+    },
+    {
+      "id": "congduc",
+      "chance": 25,
+      "title": "Công đức",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "assets/roaches/roach_gold.svg",
+        "title": "Công đức",
+        "description": "Chơi Roadup mà kh có thời gian đi chùa? Kh sao vì bạn có thể mua công đức ngay trong game",
+        "button": { "title": "+1 công đức", "url": "" },
+        "close": "Đóng",
+        "theme": "gold"
+      },
+      "popup_thanks": {
+        "image": "img/qr/qbide.jpg",
+        "caption": "+1 Công đức! Mẹo: Donate cho dev có thể nhận về 1000 công đức",
+        "close": "Đóng",
+        "theme": "gold"
+      },
+      "specialFunction": ""
+    },
+    {
+      "id": "cafelaura",
+      "chance": 55,
+      "title": "Cafe lâu ra",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 20, "cheese": 0 },
+      "popup_buy": {
+        "image": "assets/roaches/roach_legendary.svg",
+        "title": "Cà phê lâu ra",
+        "description": "Cà phê lâu ra với 2 vị nấm linh chi và đông trùng hạ thảo. Chất cà phê thì đậm đà sánh kẹo, hậu vị thì không bị chua. Trong lúc chờ đợi thì mình sẽ pha ngay một ly lâu ra cà phê nha. Chỉ cần đổ cà phê vào ly thêm một chút nước nóng rồi khuấy đều là đã có ngay một ly cà phê thơm ngon đậm vị sánh mịn mà không hề bị chua ở hậu vị.",
+        "button": {
+          "title": "Cà phê lâu ra",
+          "url": "https://s.shopee.vn/50Xp2X7mQg"
+        },
+        "close": "Đóng",
+        "theme": "legendary"
+      },
+      "popup_thanks": {
+        "image": "assets/misc/gift.svg",
+        "caption": "2 vị nắm linh chi và đông trùng hạ thảo",
+        "close": "Đóng",
+        "theme": "legendary"
+      },
+      "specialFunction": ""
+    },
+    {
+      "id": "aosadboiz",
+      "chance": 55,
+      "title": "Áo sạtboi",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "assets/roaches/roach_mystery.svg",
+        "title": "Áo sạtboi",
+        "description": "Muốn gia nhập tổ chức sạtboi? Trước tiên phải có áo đã",
+        "button": { "title": "+1 thành viên", "url": "https://s.shopee.vn/3B6AsKxEVW" },
+        "close": "Đóng",
+        "theme": "mystery"
+      },
+      "popup_thanks": {
+        "image": "assets/misc/gift.svg",
+        "caption": "+1 thành viên",
+        "close": "Đóng",
+        "theme": "mystery"
+      },
+      "specialFunction": ""
+    }
+  ]
+}

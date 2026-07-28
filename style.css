@@ -1,0 +1,587 @@
+/* ============================================================
+   CHỢ TRỜI ROACHUP — style.css
+   Toàn bộ màu / kích thước quan trọng để trong CSS variables ở
+   :root để dễ chỉnh, không cần mò trong từng class.
+   ============================================================ */
+
+:root{
+  /* ---- palette chính (từ brief) ---- */
+  --c-mint:      #C7F9CC;
+  --c-teal:      #38A3A5;
+  --c-mintdeep:  #A8EDCB;
+  --c-cyan:      #05DBF2;
+  --c-cyan2:     #05C7F2;
+  --c-blue:      #3A6DAF;
+  --c-blue-deep: #2C5688;
+  --c-blue-pale: #BAD7EB;
+
+  /* ---- màu nhấn ---- */
+  --a-forest:  #183D30;
+  --a-green:   #3EA057;
+  --a-purple:  #696CBB;
+  --a-violet:  #7D5CC9;
+
+  /* ---- phối thêm cho chiều sâu, vẫn giữ tổng thể sáng ---- */
+  --c-almost-white: #F7FBFA;
+  --c-wine: #7A3B4A;
+  --c-beige: #FBF3E3;
+
+  /* ---- semantic tokens ---- */
+  --bg-app: linear-gradient(160deg, var(--c-almost-white) 0%, var(--c-mint) 45%, var(--c-blue-pale) 100%);
+  --surface: #FFFFFFE6;
+  --surface-solid: #FFFFFF;
+  --text-main: var(--a-forest);
+  --text-soft: #3E5B52;
+  --shadow-soft: 0 10px 30px rgba(24, 61, 48, 0.14);
+  --shadow-pop: 0 24px 60px rgba(24, 61, 48, 0.28);
+  --radius-lg: 18px;
+  --radius-md: 10px;
+  --radius-sm: 7px;
+
+  /* easing cong có cảm giác quán tính nhẹ */
+  --ease-inertia: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --font-display: 'Baloo 2', 'Be Vietnam Pro', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+}
+
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body{
+  margin:0; padding:0;
+  width:100%; height:100%;
+  overflow:hidden; /* không cuộn dọc giữa các trang, từng page full-screen */
+  font-family: var(--font-body);
+  color: var(--text-main);
+  background: var(--bg-app);
+  background-attachment: fixed;
+}
+
+body{
+  position: fixed;
+  inset: 0;
+}
+
+h1, h2, h3, .display{
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+}
+
+button{
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+img{ -webkit-user-drag: none; user-select: none; }
+
+/* ============================================================
+   PAGE SYSTEM — mỗi page là 1 slide full màn hình, chuyển bằng
+   trượt ngang mượt (giống PowerPoint), không dùng scroll dọc.
+   ============================================================ */
+
+#app{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.page{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(40px, 0, 0) scale(0.98);
+  transition: transform 0.62s var(--ease-inertia), opacity 0.5s var(--ease-soft);
+  will-change: transform, opacity;
+}
+
+.page.is-active{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0,0,0) scale(1);
+  z-index: 2;
+}
+
+.page.is-leaving-left{
+  transform: translate3d(-56px, 0, 0) scale(0.98);
+  opacity: 0;
+}
+.page.is-leaving-right{
+  transform: translate3d(56px, 0, 0) scale(0.98);
+  opacity: 0;
+}
+
+/* ============================================================
+   MAIN MENU
+   ============================================================ */
+
+.menu-page{
+  text-align: center;
+  gap: 28px;
+}
+
+.menu-title{
+  font-size: clamp(2.2rem, 7vw, 3.6rem);
+  color: var(--a-forest);
+  letter-spacing: 0.5px;
+  text-shadow: 0 3px 0 rgba(255,255,255,0.5);
+}
+
+.menu-title .emoji-roach{
+  display:inline-block;
+  animation: wiggle 2.6s ease-in-out infinite;
+}
+
+@keyframes wiggle{
+  0%, 100%{ transform: rotate(-6deg); }
+  50%{ transform: rotate(8deg); }
+}
+
+.menu-desc{
+  max-width: 520px;
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  /* Khu vực mô tả — người dùng tự viết nội dung trong index.html (#menu-description) */
+}
+
+.menu-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(340px, 86vw);
+}
+
+.btn{
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 16px 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s var(--ease-inertia), box-shadow 0.3s var(--ease-inertia), filter 0.2s ease;
+}
+.btn:active{ transform: scale(0.95); }
+.btn:hover{ transform: translateY(-3px); box-shadow: 0 16px 34px rgba(24,61,48,0.22); }
+
+.btn-primary{
+  color: var(--surface-solid);
+  background: linear-gradient(135deg, var(--c-teal), var(--a-green));
+}
+.btn-donate{
+  color: var(--a-forest);
+  background: linear-gradient(135deg, var(--c-mint), var(--c-mintdeep));
+  border: 2px solid var(--c-teal);
+}
+
+/* ============================================================
+   FLOATING NAV
+   ============================================================ */
+
+.floating-logo{
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.505);
+  backdrop-filter: blur(5px);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  z-index: 50;
+  transition: transform 0.5s ;
+}
+.floating-logo.is-open{
+  transform: rotate(15deg);
+  transition: transform 0.5s ;
+}
+.floating-logo:active{ transform: scale(0.9); }
+
+.floating-nav{
+  position: fixed;
+  right: 22px;
+  bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 49;
+  transform: translateX(140%) rotate(-4deg);
+  opacity: 0;
+  transition: transform 0.5s var(--ease-inertia), opacity 0.4s var(--ease-soft);
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.404);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  border-radius: 15px;
+}
+.floating-nav.is-open{
+  transform: translateX(0) rotate(0deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-nav button{
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  color: var(--a-forest);
+  font-family: var(--font-display);
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease-inertia), background 0.25s ease;
+}
+.floating-nav button:hover{ background: var(--c-mint); transform: translateX(-4px); }
+
+/* ============================================================
+   DONATE PAGE
+   ============================================================ */
+
+.donate-page{ gap: 20px; text-align: center; }
+.donate-card{
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.donate-qr{
+  width: min(260px, 60vw);
+  height: min(260px, 60vw);
+  border-radius: var(--radius-md);
+  background: repeating-linear-gradient(45deg, var(--c-blue-pale), var(--c-blue-pale) 10px, #fff 10px, #fff 20px);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  padding: 10px;
+  text-align: center;
+}
+
+/* ============================================================
+   PLAY PAGE
+   ============================================================ */
+
+.play-page{
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.play-header{
+  width: 100%;
+  padding: 20px 20px 0;
+  display:flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.play-title{
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: var(--a-forest);
+}
+
+.currency-hud{
+  display:flex;
+  gap: 10px;
+}
+
+.currency-pill{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.currency-pill .icon{ font-size: 1.1rem; }
+
+/* roach playground: khu vực gián di chuyển tự do */
+.roach-field{
+  position: relative;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  contain: layout paint size;
+}
+
+.roach{
+  position: absolute;
+  top: 0; left: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  touch-action: manipulation;
+}
+
+.roach img{
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(24,61,48,0.18));
+  pointer-events: none;
+}
+
+.roach-label{
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+ 
+  padding: 3px 10px;
+  border-radius: 999px;
+
+  color: var(--a-forest);
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  transition: transform 0.2s var(--ease-inertia);
+  width:max-content;
+  max-width:max-content;
+}
+.roach-label:active{ transform: scale(0.92); }
+
+.play-footer{
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  padding: 18px 0 26px;
+}
+
+.btn-exchange{
+  color: rgb(15, 15, 82);
+  background: rgba(255, 255, 255, 0.473);
+  backdrop-filter: blur(10px);
+  font-size: 1.1rem;
+  padding: 16px 30px;
+  border-radius: 15px;
+}
+
+/* ============================================================
+   POPUPS (mua & cảm ơn)
+   ============================================================ */
+
+.overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 61, 48, 0.28);
+  backdrop-filter: blur(0px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-soft), backdrop-filter 0.4s var(--ease-soft);
+}
+.overlay.is-open{
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.popup{
+  position: relative;
+  width: min(560px, 80vw);
+  height: min(720px, 80vh);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--a-forest);
+  box-shadow: var(--shadow-pop);
+  transform: scale(0.82);
+  filter: blur(6px);
+  opacity: 0;
+  transition: transform 0.45s var(--ease-inertia), opacity 0.35s var(--ease-soft), filter 0.4s var(--ease-soft);
+}
+.overlay.is-open .popup{
+  transform: scale(1);
+  filter: blur(0);
+  opacity: 1;
+}
+
+.popup-close{
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 20;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  color: var(--a-forest);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display:flex; align-items:center; justify-content:center;
+  transition: transform 0.25s var(--ease-inertia), background 0.2s ease;
+}
+.popup-close:hover{ background: #fff; transform: rotate(90deg); }
+
+/* ---- popup mua: ảnh chéo góc trên trái -> dưới phải ---- */
+.popup-buy .popup-image-wrap{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.popup-buy .popup-image-wrap img{
+  position: absolute;
+  width: 100%;
+  height: auto;
+
+  -webkit-mask-image: linear-gradient(135deg, #000 35%, rgba(0,0,0,0.55) 60%, transparent 85%);
+  mask-image: linear-gradient(135deg, #000 35%, rgba(0,0,0,0.55) 60%, transparent 85%);
+}
+
+.popup-content{
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 26px 24px 28px;
+  /* glass/gradient chuyển dần từ góc dưới phải lên góc trên trái */
+  background: linear-gradient(to top left, rgba(24,61,48,0.92) 5%,rgba(24,61,48,0.92) 10%, rgba(24,61,48,0.55) 55%, rgba(24,61,48,0.05) 100%);
+
+  color: #F7FBFA;
+}
+
+.popup-title{
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.popup-desc-wrap{
+  max-height: 34vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin-bottom: 16px;
+  padding-right: 6px;
+  line-height: 1.55;
+  font-size: 0.98rem;
+  color: #EAF6F1;
+  /* JS sẽ gắn hiệu ứng cuộn có quán tính (momentum scroll) cho phần tử này */
+}
+.popup-desc-wrap::-webkit-scrollbar{ width: 4px; }
+.popup-desc-wrap::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.35); border-radius: 10px; }
+
+.popup-buy-btn{
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 13px 26px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--c-teal), var(--a-green));
+  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+  transition: transform 0.25s var(--ease-inertia), filter 0.2s ease;
+}
+.popup-buy-btn:hover{ transform: translateY(-2px); }
+.popup-buy-btn:active{ transform: scale(0.95); }
+.popup-buy-btn.is-disabled{
+  filter: grayscale(0.6) brightness(0.65);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.popup-price-tag{
+  display:flex; gap: 10px;
+  margin-bottom: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.popup-price-tag span{
+  background: rgba(255,255,255,0.16);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* ---- popup cảm ơn ---- */
+.popup-thanks{
+  background: var(--surface-solid);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 36px 28px;
+  text-align: center;
+}
+.popup-thanks img{
+  width: 60%;
+  max-width: 240px;
+  filter: drop-shadow(0 10px 18px rgba(24,61,48,0.2));
+}
+.popup-thanks-caption{
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  max-width: 380px;
+  line-height: 1.6;
+}
+.popup-thanks .popup-buy-btn{ align-self: center; }
+
+/* ---- themes cho từng nhóm gián (theme trong JSON) ---- */
+.theme-default1 .popup-content{ background: linear-gradient(to top left, rgba(24,61,48,0.92) 0%,rgba(24,61,48,0.5) 45%, rgba(24,61,48,0.5) 55%, transparent 90%); }
+.theme-default2{ background: linear-gradient(160deg, #fff, var(--c-mint)); }
+
+.theme-gold .popup-content{ background: linear-gradient(to top left, rgba(120,80,10,0.92) 15%, rgba(120,80,10,0.5) 55%, transparent 90%); }
+.theme-gold .popup-buy-btn{ background: linear-gradient(135deg, #F2B705, #E89B00); }
+.theme-gold.popup-thanks{ background: linear-gradient(160deg, #fff, #FBF0CE); }
+
+.theme-legendary .popup-content{ background: linear-gradient(to top left, rgba(15,45,70,0.92) 15%, rgba(15,45,70,0.5) 55%, transparent 90%); }
+.theme-legendary .popup-buy-btn{ background: linear-gradient(135deg, var(--c-cyan), var(--c-blue)); }
+.theme-legendary.popup-thanks{ background: linear-gradient(160deg, #fff, var(--c-blue-pale)); }
+
+.theme-mystery .popup-content{ background: linear-gradient(to top left, rgba(10,10,20,0.94) 15%, rgba(10,10,20,0.55) 55%, transparent 90%); }
+.theme-mystery .popup-buy-btn{ background: linear-gradient(135deg, var(--a-violet), var(--a-purple)); }
+.theme-mystery.popup-thanks{ background: linear-gradient(160deg, #fff, #E4E1F5); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 640px){
+  .popup{ width: 92vw; height: 82vh; }
+  .play-header{ padding: 14px 14px 0; }
+  .currency-pill{ font-size: 0.85rem; padding: 7px 11px; }
+  .floating-logo{ width: 56px; height: 56px; font-size: 26px; right: 16px; bottom: 16px; }
+  .floating-nav{ right: 16px; bottom: 82px; }
+  .roach{ width: 62px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
