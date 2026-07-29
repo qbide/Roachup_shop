@@ -22,30 +22,20 @@
     const els = {}; // cache các phần tử DOM hay dùng, gán trong initDom()
   
     /* ==========================================================
-       1. GOOGLE SHEET & API BRIDGE (Thay thế cho Godot Bridge cũ)
-       ----------------------------------------------------------
-       Mục đích: 
-       - Đọc player_id từ URL (ví dụ: shop.github.io/?id=abc123)
-       - Lấy dữ liệu cức/phô mai từ Google Sheet qua Apps Script API
-       - Cập nhật số liệu mới lên Google Sheet khi mua sắm/đổi đồ
+       1. GOOGLE SHEET & API BRIDGE
        ========================================================== */
   
-    // ⚠️ THAY URL GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY:
+    // ⚠️ THAY URL GOOGLE APPS SCRIPT CỦA BẠN VÀO CÁC BIẾN DƯỚI ĐÂY:
     const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzv1QLZoAtHPQL__3UvAoP42yAltlSIqDR4C2KHphF47tJcy9OhSJFkEGSGGh6LMtjR/exec";
-    const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbyVibaffomGzEhN8C0PzwtEFVlrHajMUI0YjC_A90PP5lBOu2XC1IWyEjzLi6tVEifHTg/exec"
-    // Khai báo biến lưu trạng thái người chơi
+    const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbzf1FSl9tWsqaYasvjejLrRgN6YS_mc3n-TszTT0KgfJSV4xDkuc0MFa2O_v-d2EWzM/exec";
+    
     let playerId = new URLSearchParams(window.location.search).get('id');
   
     const SheetAPIBridge = {
-      /**
-       * Gọi khi web shop vừa load xong.
-       * Lấy player_id từ URL và fetch dữ liệu mới nhất từ Google Sheet.
-       * Trả về Promise chứa { poop, cheese } hoặc null nếu lỗi.
-       */
       async getInitialCurrency() {
         if (!playerId) {
           console.warn("[API] Không tìm thấy player_id trên URL! Ví dụ URL đúng: ?id=abc123");
-          return null; // Trả về null để web dùng số mặc định trong config.json
+          return null;
         }
   
         try {
@@ -68,18 +58,12 @@
         }
       },
   
-      /**
-       * Đồng bộ dữ liệu cức và phô mai mới lên Google Sheet.
-       * Hàm này sẽ được gọi mỗi khi người chơi mua sắm thành công.
-       */
       async saveCurrencyToSheet(poop, cheese) {
         if (!playerId) {
-          alert("Không tìm thấy Player ID, không thể lưu dữ liệu!");
           return false;
         }
   
         try {
-          // Dùng text/plain để tránh bị dính lỗi CORS Preflight từ Google Apps Script
           const response = await fetch(GOOGLE_API_URL, {
             method: "POST",
             headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -95,34 +79,18 @@
           return true;
         } catch (error) {
           console.error("[API] Lỗi khi lưu lên Sheet:", error);
-          alert("Lỗi kết nối! Dữ liệu chưa được lưu.");
           return false;
         }
       },
   
-      /**
-       * Xử lý khi thay đổi tiền/tài sản (mua sắm, đổi gián...)
-       */
       async onCurrencyChanged(poop, cheese) {
         console.log(`[Shop] Số dư mới: ${poop} Cức | ${cheese} Phô mai. Đang lưu lên Cloud...`);
         await this.saveCurrencyToSheet(poop, cheese);
       },
   
-      /**
-       * Xử lý sau khi MUA vật phẩm thành công
-       */
-      async onPurchase(groupId, price, currentPoop, currentCheese) {
-        console.log(`[Shop] Mua vật phẩm group: ${groupId}, giá:`, price);
-        // Đã được xử lý chung qua onCurrencyChanged trong setCurrency
-      },
+      async onPurchase(groupId, price, currentPoop, currentCheese) {},
   
-      /**
-       * Xử lý sau khi ĐỔI GIÁN thành công
-       */
-      async onExchange(price, newRoachIds, currentPoop, currentCheese) {
-        console.log(`[Shop] Đổi gián thành công. Danh sách gián mới:`, newRoachIds);
-        // Đã được xử lý chung qua onCurrencyChanged trong setCurrency
-      }
+      async onExchange(price, newRoachIds, currentPoop, currentCheese) {}
     };
   
     /* ==========================================================
@@ -140,7 +108,7 @@
     }
   
     /* ==========================================================
-       3. CURRENCY (cức / phô mai)
+       3. CURRENCY
        ========================================================== */
     function setCurrency(poop, cheese) {
       state.currency.poop = Math.max(0, Math.round(poop));
@@ -166,7 +134,7 @@
     }
   
     /* ==========================================================
-       4. PAGE NAVIGATION (kiểu PowerPoint, trượt ngang)
+       4. PAGE NAVIGATION
        ========================================================== */
     const PAGE_ORDER = ['menu', 'play', 'donate'];
   
@@ -361,7 +329,7 @@
     }
   
     /* ==========================================================
-       8. MOMENTUM SCROLL (quán tính nhẹ) CHO MÔ TẢ TRONG POPUP
+       8. MOMENTUM SCROLL
        ========================================================== */
     function attachMomentumScroll(el) {
       let isDragging = false;
@@ -414,7 +382,7 @@
     }
   
     /* ==========================================================
-       9. POPUPS (mua & cảm ơn)
+       9. POPUPS
        ========================================================== */
     const THEME_PREFIX = 'theme-';
   
@@ -445,10 +413,12 @@
       const affordable = canAfford(group.price);
       els.buyBtn.classList.toggle('is-disabled', !hasUrl && !affordable);
   
-      els.buyBtn.onclick = async () => {
+      els.buyBtn.onclick = () => {
         if (hasUrl) {
-          await analyticsBuy(group);
+          // Mở link Shopee trước để không bị trình duyệt chặn Popup
           window.open(p.button.url, '_blank', 'noopener');
+          // Gửi thông kê về Google Sheet ở chế độ chạy ngầm
+          analyticsBuy(group);
           return;
         }
         if (!canAfford(group.price)) return;
@@ -475,13 +445,39 @@
     }
   
     /* ==========================================================
-       10. specialFunction PLACEHOLDER
+       10. ANALYTICS & SPECIAL FUNCTIONS
        ========================================================== */
     window.RoachSpecialFunctions = {
       mystery_box(group) {
         console.log('[RoachUp] specialFunction chưa được lập trình:', group.specialFunction);
       },
     };
+  
+    // Hàm gửi tín hiệu click vào vật phẩm
+    function analyticsItem(group) {
+      fetch(ANALYTICS_API, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          action: "clickItem",
+          id: group.id,
+          title: group.popup_buy.title
+        })
+      }).catch(err => console.error("Analytics Error:", err));
+    }
+  
+    // Hàm gửi tín hiệu click nút Mua
+    function analyticsBuy(group) {
+      fetch(ANALYTICS_API, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          action: "clickBuy",
+          id: group.id,
+          title: group.popup_buy.title
+        })
+      }).catch(err => console.error("Analytics Error:", err));
+    }
   
     /* ==========================================================
        11. INIT
@@ -546,37 +542,7 @@
         refreshFieldBounds();
       });
     }
-    async function analyticsItem(group){
-
-      fetch(ANALYTICS_API,{
-          method:"POST",
-          headers:{
-              "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-              action:"clickItem",
-              id:group.id,
-              title:group.popup_buy.title
-          })
-      });
   
-  }
-  
-  async function analyticsBuy(group){
-  
-      await fetch(ANALYTICS_API,{
-          method:"POST",
-          headers:{
-              "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-              action:"clickBuy",
-              id:group.id,
-              title:group.popup_buy.title
-          })
-      });
-  
-  }
     async function init() {
       cacheDom();
       bindEvents();
@@ -593,12 +559,10 @@
       // ---- API BRIDGE: Thử lấy tiền từ Google Sheet qua Cloud trước ----
       const external = await SheetAPIBridge.getInitialCurrency();
       if (external && typeof external.poop === 'number') {
-        // Đã lấy thành công từ Google Sheet
         state.currency.poop = Math.max(0, Math.round(external.poop));
         state.currency.cheese = Math.max(0, Math.round(external.cheese));
         renderCurrency();
       } else {
-        // Không lấy được dữ liệu hoặc không có ID -> dùng tiền mặc định từ config
         setCurrency(config.currency.defaultPoop, config.currency.defaultCheese);
       }
   
