@@ -32,7 +32,7 @@
   
     // ⚠️ THAY URL GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY:
     const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzv1QLZoAtHPQL__3UvAoP42yAltlSIqDR4C2KHphF47tJcy9OhSJFkEGSGGh6LMtjR/exec";
-  
+    const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbyVibaffomGzEhN8C0PzwtEFVlrHajMUI0YjC_A90PP5lBOu2XC1IWyEjzLi6tVEifHTg/exec"
     // Khai báo biến lưu trạng thái người chơi
     let playerId = new URLSearchParams(window.location.search).get('id');
   
@@ -266,6 +266,7 @@
         img.addEventListener('click', (e) => {
           e.stopPropagation();
           openBuyPopup(group);
+          analyticsItem(group);
         });
         
         roachEl.appendChild(img);
@@ -276,6 +277,7 @@
         label.addEventListener('click', (e) => {
           e.stopPropagation();
           openBuyPopup(group);
+          analyticsItem(group);
         });
         roachEl.appendChild(label);
   
@@ -443,8 +445,9 @@
       const affordable = canAfford(group.price);
       els.buyBtn.classList.toggle('is-disabled', !hasUrl && !affordable);
   
-      els.buyBtn.onclick = () => {
+      els.buyBtn.onclick = async () => {
         if (hasUrl) {
+          await analyticsBuy(group);
           window.open(p.button.url, '_blank', 'noopener');
           return;
         }
@@ -543,7 +546,37 @@
         refreshFieldBounds();
       });
     }
+    async function analyticsItem(group){
+
+      fetch(ANALYTICS_API,{
+          method:"POST",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+              action:"clickItem",
+              id:group.id,
+              title:group.popup_buy.title
+          })
+      });
   
+  }
+  
+  async function analyticsBuy(group){
+  
+      await fetch(ANALYTICS_API,{
+          method:"POST",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+              action:"clickBuy",
+              id:group.id,
+              title:group.popup_buy.title
+          })
+      });
+  
+  }
     async function init() {
       cacheDom();
       bindEvents();
