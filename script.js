@@ -27,7 +27,7 @@
   
     // ⚠️ THAY URL GOOGLE APPS SCRIPT CỦA BẠN VÀO CÁC BIẾN DƯỚI ĐÂY:
     const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzv1QLZoAtHPQL__3UvAoP42yAltlSIqDR4C2KHphF47tJcy9OhSJFkEGSGGh6LMtjR/exec";
-    const ANALYTICS_API = "hhttps://script.google.com/macros/s/AKfycbzf1FSl9tWsqaYasvjejLrRgN6YS_mc3n-TszTT0KgfJSV4xDkuc0MFa2O_v-d2EWzM/exec";
+    const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbzf1FSl9tWsqaYasvjejLrRgN6YS_mc3n-TszTT0KgfJSV4xDkuc0MFa2O_v-d2EWzM/exec";
     
     let playerId = new URLSearchParams(window.location.search).get('id');
   
