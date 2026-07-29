@@ -453,32 +453,33 @@
       },
     };
   
-    // Hàm gửi tín hiệu click vào vật phẩm
-    function analyticsItem(group) {
-      fetch(ANALYTICS_API, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          action: "clickItem",
-          id: group.id,
-          title: group.popup_buy.title
-        })
-      }).catch(err => console.error("Analytics Error:", err));
-    }
-  
-    // Hàm gửi tín hiệu click nút Mua
-    function analyticsBuy(group) {
-      fetch(ANALYTICS_API, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          action: "clickBuy",
-          id: group.id,
-          title: group.popup_buy.title
-        })
-      }).catch(err => console.error("Analytics Error:", err));
-    }
-  
+   // Gửi data ngầm không bị chặn CORS
+  function sendAnalyticsData(payload) {
+    fetch(ANALYTICS_API, {
+      method: "POST",
+      mode: "no-cors", // Bắt buộc có dòng này để Google không chặn
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: JSON.stringify(payload)
+    }).catch(err => console.error("Analytics Error:", err));
+  }
+
+  function analyticsItem(group) {
+    sendAnalyticsData({
+      action: "clickItem",
+      id: group.id,
+      title: group.popup_buy ? group.popup_buy.title : group.title
+    });
+  }
+
+  function analyticsBuy(group) {
+    sendAnalyticsData({
+      action: "clickBuy",
+      id: group.id,
+      title: group.popup_buy ? group.popup_buy.title : group.title
+    });
+  }
     /* ==========================================================
        11. INIT
        ========================================================== */
