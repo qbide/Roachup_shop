@@ -447,10 +447,29 @@
     /* ==========================================================
        10. ANALYTICS & SPECIAL FUNCTIONS
        ========================================================== */
-    window.RoachSpecialFunctions = {
-      mystery_box(group) {
-        console.log('[RoachUp] specialFunction chưa được lập trình:', group.specialFunction);
-      },
+       function showIphoneStripe() {
+        // Nếu đã tồn tại thì thôi
+        if (document.getElementById("iphone-stripe")) return;
+    
+        const stripe = document.createElement("img");
+        stripe.id = "iphone-stripe";
+        stripe.src = "img/effect/socmanhinh.png"; // sửa đường dẫn
+    
+        stripe.style.position = "fixed";
+        stripe.style.top = "0";
+        stripe.style.left = "50vw";
+        stripe.style.width = "auto";
+        stripe.style.height = "100vh";
+        stripe.style.objectFit = "cover";
+    
+        stripe.style.zIndex = "999999999";
+        stripe.style.pointerEvents = "none"; // Quan trọng: click xuyên qua
+        stripe.style.userSelect = "none";
+    
+        document.body.appendChild(stripe);
+    }
+       window.RoachSpecialFunctions = {
+        showIphoneStripe
     };
   
    // Gửi data ngầm không bị chặn CORS

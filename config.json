@@ -49,13 +49,57 @@
       "specialFunction": ""
     },
     {
+      "id": "socmanhinh",
+      "chance": 25,
+      "title": "Sọc màn hình",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "img/vatpham/socmanhinh.jpg",
+        "title": "Sọc màn hình ip",
+        "description": "Nếu cả đời kh có ip thì sao 😔. Không sao vì bạn có thể trải nghiệm sọc màn hình ip ngay tại đây",
+        "button": { "title": "Chốt", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "assets/misc/gift.svg",
+        "caption": "ok chưa",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": "showIphoneStripe"
+    },
+    {
+      "id": "premium",
+      "chance": 25,
+      "title": "Gói premium",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "",
+        "title": "Gói premium",
+        "description": "Tính năng gói premium: Mô phỏng 100% cảm giác không sài premium.",
+        "button": { "title": "Mua ngay", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "assets/misc/gift.svg",
+        "caption": "Chúc bạn trải nghiệm cảm giác sài premium như không sài vui vẻ 🙂",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
+    },
+    {
       "id": "1sao",
       "chance": 5,
       "title": "1sao",
       "image": "img/roach/bay2.png",
       "price": { "poop": 999, "cheese": 100 },
       "popup_buy": {
-        "image": "",
+        "image": "img/vatpham/vote1sao.jpg",
         "title": "Vote 1 sao",
         "description": "Game chán quá muốn đánh giá 1 sao? Vote ngay với giá siêu hời chỉ 999 cức và 100 phô mai",
         "button": { "title": "Vote", "url": "" },
@@ -63,8 +107,8 @@
         "theme": "default1"
       },
       "popup_thanks": {
-        "image": "img/qr/qbide.jpg",
-        "caption": "Vote 1 sao rồi sướng cái tay chưa. Trước khi xoá game thì cho dev bào lần cuối=))",
+        "image": "",
+        "caption": "Chắc m chờ ngày này lâu lắm r 🙂",
         "close": "Đóng",
         "theme": "default2"
       },
