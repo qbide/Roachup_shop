@@ -28,10 +28,10 @@
   "groups": [
     {
       "id": "ny",
-      "chance": 25,
+      "chance": 15,
       "title": "Anh người yêu",
       "image": "img/roach/bay2.png",
-      "price": { "poop": 100, "cheese": 100 },
+      "price": { "poop": 5, "cheese": 0},
       "popup_buy": {
         "image": "img/vatpham/anhny.jpg",
         "title": "Anh người yêu chân thành",
@@ -41,7 +41,7 @@
         "theme": "default1"
       },
       "popup_thanks": {
-        "image": "assets/misc/gift.svg",
+        "image": "",
         "caption": "Làm quen tìm hiểu nho:3",
         "close": "Đóng",
         "theme": "default2"
@@ -63,12 +63,34 @@
         "theme": "default1"
       },
       "popup_thanks": {
-        "image": "assets/misc/gift.svg",
+        "image": "",
         "caption": "ok chưa",
         "close": "Đóng",
         "theme": "default2"
       },
       "specialFunction": "showIphoneStripe"
+    },
+    {
+      "id": "doco",
+      "chance": 25,
+      "title": "Đồ cổ",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "",
+        "title": "Đồ cổ",
+        "description": "cục sì lầu ông bê lắp,chào e a đứng đây từ chiều,u là trời,tào lao bí đao,nhảm nhí,xàm xí,ảo ma canada,xu cà na,hết sảy con bà bảy,nhà bao việc,26 Sơn La chào ae nhá,tam giác là tác giam,khi anh bóp con bạch tuộc kêu,mời bạn ăn nha tui đây k chờ bn nữa h tui ăn liền,những thằng khác ngại tán em tại ngán anh,hải quay xe,bff,fa,ăn nói xà lơ,troll troll VN, hê sờ lô hê sờ li li",
+        "button": { "title": "Hoài niệm vl", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "",
+        "caption": "Nhớ không, không nhớ vì những câu nói đó đâu, nhớ vì khoảng thời gian đó..",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
     },
     {
       "id": "premium",
@@ -85,7 +107,7 @@
         "theme": "default1"
       },
       "popup_thanks": {
-        "image": "assets/misc/gift.svg",
+        "image": "",
         "caption": "Chúc bạn trải nghiệm cảm giác sài premium như không sài vui vẻ 🙂",
         "close": "Đóng",
         "theme": "default2"
@@ -93,8 +115,52 @@
       "specialFunction": ""
     },
     {
+      "id": "Danh phận",
+      "chance": 25,
+      "title": "Danh phận",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "",
+        "title": "Danh phận",
+        "description": " ''Biết là không danh phận rồi nhưng để ý em một tí''  ",
+        "button": { "title": "Mua danh phận để được chú ý ", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "",
+        "caption": "Bạn thật sự tin vào cái shop này 🥀",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
+    },
+    {
+      "id": "avt",
+      "chance": 25,
+      "title": "avt",
+      "image": "img/roach/bay2.png",
+      "price": { "poop": 5, "cheese": 0 },
+      "popup_buy": {
+        "image": "",
+        "title": "avt",
+        "description": " Thời nào r mà fb còn để avt mặt định 🙂 quê mùa vl. Mua avt r thay đe  ",
+        "button": { "title": "Mua avt ", "url": "" },
+        "close": "Đóng",
+        "theme": "default1"
+      },
+      "popup_thanks": {
+        "image": "img/vatpham/avt.png",
+        "caption": "Để avt này trên đa nền tảng là ngon lun",
+        "close": "Đóng",
+        "theme": "default2"
+      },
+      "specialFunction": ""
+    },
+    {
       "id": "1sao",
-      "chance": 5,
+      "chance": 15,
       "title": "1sao",
       "image": "img/roach/bay2.png",
       "price": { "poop": 999, "cheese": 100 },
@@ -121,29 +187,29 @@
       "image": "img/roach/bay2.png",
       "price": { "poop": 5, "cheese": 0 },
       "popup_buy": {
-        "image": "assets/roaches/roach_gold.svg",
+        "image": "",
         "title": "Công đức",
         "description": "Chơi Roadup mà kh có thời gian đi chùa? Kh sao vì bạn có thể mua công đức ngay trong game",
         "button": { "title": "+1 công đức", "url": "" },
         "close": "Đóng",
-        "theme": "gold"
+        "theme": "default1"
       },
       "popup_thanks": {
         "image": "img/qr/qbide.jpg",
         "caption": "+1 Công đức! Mẹo: Donate cho dev có thể nhận về 1000 công đức",
         "close": "Đóng",
-        "theme": "gold"
+        "theme": "default2"
       },
       "specialFunction": ""
     },
     {
       "id": "cafelaura",
-      "chance": 55,
+      "chance": 50,
       "title": "Cafe lâu ra",
       "image": "img/roach/bay2.png",
-      "price": { "poop": 20, "cheese": 0 },
+      "price": { "poop": 2, "cheese": 0 },
       "popup_buy": {
-        "image": "assets/roaches/roach_legendary.svg",
+        "image": "",
         "title": "Cà phê lâu ra",
         "description": "Cà phê lâu ra với 2 vị nấm linh chi và đông trùng hạ thảo. Chất cà phê thì đậm đà sánh kẹo, hậu vị thì không bị chua. Trong lúc chờ đợi thì mình sẽ pha ngay một ly lâu ra cà phê nha. Chỉ cần đổ cà phê vào ly thêm một chút nước nóng rồi khuấy đều là đã có ngay một ly cà phê thơm ngon đậm vị sánh mịn mà không hề bị chua ở hậu vị.",
         "button": {
@@ -154,7 +220,7 @@
         "theme": "legendary"
       },
       "popup_thanks": {
-        "image": "assets/misc/gift.svg",
+        "image": "",
         "caption": "2 vị nắm linh chi và đông trùng hạ thảo",
         "close": "Đóng",
         "theme": "legendary"
@@ -163,23 +229,23 @@
     },
     {
       "id": "aosadboiz",
-      "chance": 55,
+      "chance": 50,
       "title": "Áo sạtboi",
       "image": "img/roach/bay2.png",
-      "price": { "poop": 5, "cheese": 0 },
+      "price": { "poop": 2, "cheese": 0 },
       "popup_buy": {
-        "image": "assets/roaches/roach_mystery.svg",
+        "image": "",
         "title": "Áo sạtboi",
         "description": "Muốn gia nhập tổ chức sạtboi? Trước tiên phải có áo đã",
         "button": { "title": "+1 thành viên", "url": "https://s.shopee.vn/3B6AsKxEVW" },
         "close": "Đóng",
-        "theme": "mystery"
+        "theme": "legendary"
       },
       "popup_thanks": {
-        "image": "assets/misc/gift.svg",
+        "image": "",
         "caption": "+1 thành viên",
         "close": "Đóng",
-        "theme": "mystery"
+        "theme": "legendary"
       },
       "specialFunction": ""
     }
